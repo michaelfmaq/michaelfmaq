@@ -1086,6 +1086,28 @@ b {
     width: 100%;
 }
 
+ #BingDirection {
+        font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+        margin-top: 20px;
+        border: 1px solid #ccc;
+      }
+
+      #BingDirection select, #BingDirection input {
+        font-size: 14px;
+      }
+
+      #BingDirection select {
+        width: 100%;
+      }
+
+      #BingDirection i {
+        font-size: 14px;
+      }
+      #BingDirection {
+        float: right;
+        overflow-y: auto;
+      }
+
 .HYDDirection {
     list-style: decimal;
     margin-left: 2em;
@@ -1107,9 +1129,8 @@ b {
 }
 
 .DirectionContainer {
-    min-height: 100px;
-    height: auto !important;
-    height: 100px;
+    min-height: 0;
+    max-height: 500px;
 }
 
 .DirectionTitle, .DirectionContainer {
@@ -1128,7 +1149,7 @@ b {
 }
 
 #FromAddress {
-    width: 50%;
+    width: 56%;
 }
 
 .title {

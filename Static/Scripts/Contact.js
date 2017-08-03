@@ -1,5 +1,5 @@
 ﻿/*jslint plusplus: true */
-/*globals VEMap,VELatLong,VEMapStyle,VERouteOptions,VERouteDistanceUnit*/
+/*globals */
 (function () {
     "use strict";
     var oMapData = [
@@ -19,8 +19,7 @@
                 long: 78.368914
             }
         ],
-        oBingMap,
-        oPin,
+        oMap,
         sCurrentCity,
         oOffset,
         sScrollElement,
@@ -34,7 +33,9 @@
         iHeight = 400,
         rtime = new Date(1, 1, 2000, 12, 0, 0),
         timeout = false,
-        delta = 200;
+        delta = 200,
+        oLatLng,
+        oMarker;
     function getMapSectionOffset() {
         var oMapDirDiv = $("#myMap");
         oOffset = oMapDirDiv.offset();
@@ -48,70 +49,47 @@
         oMap.height(iMapHeight);
     }
     function showMap(Latitude, Longitude, address) {
-        var oLocation = null;
         $("#NHYD").show();
-        if (oBingMap) {
-            oBingMap.Dispose();
-        }
-        oBingMap = new VEMap('myMap');
+        oLatLng = { lat: Latitude, lng: Longitude };
+        oMap = new google.maps.Map(document.getElementById('myMap'), {
+            zoom: 13,
+            center: oLatLng
+        });
+        oMarker = new google.maps.Marker({
+            position: oLatLng,
+            map: oMap,
+            title: 'MAQ Software\n' + address,
+            animation: google.maps.Animation.DROP
+        });
         resizeMap();
         if (Latitude && address) {
-            oLocation = new VELatLong(Latitude, Longitude);
             $("#MapAddress").html(address);
-            oBingMap.LoadMap(oLocation, 5, VEMapStyle.Road);
-            oPin = oBingMap.AddPushpin(oLocation);
-            oPin.SetTitle('MAQ Software');
-            oPin.SetDescription(address);
-            oBingMap.SetCenter(oLocation);
         }
     }
-    function ShowTurns(route) {
-        $("#BingDirection").removeClass("Loading");
-        if (route) {
-            var legs = route.RouteLegs,
-                turns = "<ol class='HYDDirection'>",
-                leg = null,
-                i,
-                j,
-                totalDistance = 0,  // The sum of all leg distances
-                turn,
-                legDistance;
-            // Get intermediate legs
-            if (legs.length) {
-                for (i = 0; i < legs.length; i++) {
-                    // Get this leg so we don't have to derefernce multiple times
-                    leg = legs[i];  // Leg is a VERouteLeg object
-                    // Unroll each intermediate leg
-                    turn = null;  // The itinerary leg
-                    legDistance = null;  // The distance for this leg
 
-                    for (j = 0; j < leg.Itinerary.Items.length; j++) {
-                        turn = leg.Itinerary.Items[j];  // turn is a VERouteItineraryItem object
-                        turns += "<li>" + turn.Text + "</li>";
-                        legDistance = turn.Distance;
-                        totalDistance += legDistance;
-                    }
-                }
-                turns += "</ol>";
-                $("#NHYDTtl,#NHYDMile").show();
-                $("#NHYDMile").html("<b id='totalDistance'>Total distance: </b>" + totalDistance.toFixed(1) + " miles");
-                $("#BingDirection").html(turns);
+    function getRouteMap(inputAddress) {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsDisplay.setMap(oMap);
+        directionsService.route({
+            origin: inputAddress,
+            destination: oLatLng,
+            travelMode: 'DRIVING'
+        }, function (response, status) {
+            $("#BingDirection").removeClass("Loading");
+            $("#BingDirectionError").html('');
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+                directionsDisplay.setPanel(document.getElementById('BingDirection'));
+            } else {
+                $("#BingDirectionError").html('Unable to find a route for the location you entered. Please try again.');
             }
-        }
-    }
-    function getRouteMap(locations) {
-        var options = new VERouteOptions();
-        options.DrawRoute = true;
-        options.SetBestMapView = true;
-        options.RouteCallback = ShowTurns;
-        options.DistanceUnit = VERouteDistanceUnit.Mile;
-        options.ShowDisambiguation = true;
-        oBingMap.GetDirections(locations, options);
+        });
     }
     function getRouteTo(latitude, longitude, inputAddress) {
-        var MAQSoftwareLocation = new VELatLong(latitude, longitude), iAddressSectionTopPosition;
+        var iAddressSectionTopPosition;
         if (inputAddress && inputAddress !== "") {
-            getRouteMap([inputAddress, MAQSoftwareLocation]);
+            getRouteMap(inputAddress);
         }
         iAddressSectionTopPosition = $("#NHYDTtl").offset().top;
         $(sScrollElement).animate({ scrollTop: iAddressSectionTopPosition }, 500);
@@ -176,14 +154,14 @@
             sSearchTerm = $("#FromAddress").val();
             sSearchTerm = sSearchTerm.replace(/^\s+|\s+$/g, '');
             if (sSearchTerm) {
-                $("#BingDirection").html("");
+                $("#BingDirection,#BingDirectionError").html("");
                 $("#NHYDTtl,#NHYDMile").hide();
                 renderMap(sCurrentCity, false, sSearchTerm);
             }
         });
         $("#ClearDirection").click(function () {
             $("#FromAddress").val("");
-            $("#BingDirection").html("");
+            $("#BingDirection,#BingDirectionError").html("");
             $("#NHYDTtl,#NHYDMile").hide();
             renderMap(sCurrentCity, true);
             setMapPosition();

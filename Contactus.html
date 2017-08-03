@@ -84,15 +84,18 @@
                     <p id="NHYDTtl" class="DirectionTitle m30 Clear" style="display: none;">Turn-by-Turn directions</p>
                     <p id="NHYDMile" class="DirectionTitle" style="display: none;"></p>
                     <div id="BingDirection" class="DirectionContainer Clear">
-                    </div>                    
+                    </div>
+                    <div id="BingDirectionError" class="DirectionContainer Clear">
+                    </div>
                 </div>                
             </aside>
             <aside id="MapContainer" class="FloatLeft">
                 <div id="myMap">
                 </div>
             </aside>
-        </section>        
+        </section>
     </div>
-    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+    <!-- Below used Google API Key is of Hardik Avaiya, it has to be changed using MAQ Software account -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkRz2ve2GicYNdYuZMu9E96LbQHUMdDlE"></script>
     <script src="../../Static/Scripts/Contact.js?v=20160405"></script>
 </div>
