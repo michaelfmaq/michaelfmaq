@@ -273,10 +273,10 @@ function sliderAll() {
         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
         autoPlay: true,
         autoplay: true,
-        autoplaySpeed: 800,
-        navSpeed: 800,
-        paginationSpeed: 800,
-        slideSpeed: 800,
+        autoplaySpeed: 10000,
+        navSpeed: 10000,
+        paginationSpeed: 10000,
+        slideSpeed: 10000,
         dots: true
     });
 
