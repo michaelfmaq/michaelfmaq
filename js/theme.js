@@ -46,8 +46,9 @@ $(document).ready(function () {
     wow.init();
 
 
-	//controls slider speed also see bootstrap.css carousel.item 
-	$.fn.carousel.Constructor.TRANSITION_DURATION = 10000  // 2 seconds
+	$('.carousel').carousel({
+		interval: 10000
+	});
 });
 
 function loadPlugins() {
