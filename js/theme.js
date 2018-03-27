@@ -45,10 +45,6 @@ $(document).ready(function () {
     })
     wow.init();
 
-
-	$('.carousel').carousel({
-		interval: 10000
-	});
 });
 
 function loadPlugins() {
@@ -271,12 +267,12 @@ function sliderAll() {
         pagination: true,  // Show pagination buttons
         navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
- //       autoPlay: true,
- //       autoplay: true,
-        autoplaySpeed: 10000,
-        navSpeed: 10000,
-        paginationSpeed: 10000,
-        slideSpeed: 10000,
+        autoPlay: true,
+        autoplay: true,
+        autoplaySpeed: 800,
+        navSpeed: 800,
+        paginationSpeed: 800,
+        slideSpeed: 800,
         dots: true
     });
 
