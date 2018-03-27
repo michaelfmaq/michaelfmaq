@@ -47,7 +47,7 @@ $(document).ready(function () {
 
 
 	//controls slider speed also see bootstrap.css carousel.item 
-	$.fn.carousel.Constructor.TRANSITION_DURATION = 2000  // 2 seconds
+	$.fn.carousel.Constructor.TRANSITION_DURATION = 4000  // 2 seconds
 });
 
 function loadPlugins() {
