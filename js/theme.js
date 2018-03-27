@@ -417,7 +417,8 @@ function sliderAll() {
 
     // Content Slider
     $('.content-carousel').owlCarousel({
-        autoPlay: true,
+        autoPlay: 10000,
+		autoplay: 10000,
         autoHeight: true,
         stopOnHover: true,
         singleItem: true,
