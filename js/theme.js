@@ -45,6 +45,9 @@ $(document).ready(function () {
     })
     wow.init();
 
+
+	//controls slider speed also see bootstrap.css carousel.item 
+	$.fn.carousel.Constructor.TRANSITION_DURATION = 2000  // 2 seconds
 });
 
 function loadPlugins() {
