@@ -5566,9 +5566,9 @@ button.close {
 }
 
 .carousel-inner .carousel-item {
-  transition: -webkit-transform 4s ease;
-  transition: transform 4s ease;
-  transition: transform 4s ease, -webkit-transform 4s ease;
+  transition: -webkit-transform 10s ease;
+  transition: transform 10s ease;
+  transition: transform 10s ease, -webkit-transform 10s ease;
 }
 
 @media (-webkit-transform-3d) {
