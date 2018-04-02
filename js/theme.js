@@ -257,8 +257,6 @@ function sliderAll() {
 
     // fullwidth Slider
     $('.fullwidth-slider').owlCarousel({
-		autoplay: 10000,
-		autoplay: 10000,
         items: 1,
         singleItem: true,
         autoHeight: true,
@@ -419,8 +417,7 @@ function sliderAll() {
 
     // Content Slider
     $('.content-carousel').owlCarousel({
-        autoPlay: 10000,
-		autoplay: 10000,
+        autoPlay: true,
         autoHeight: true,
         stopOnHover: true,
         singleItem: true,
