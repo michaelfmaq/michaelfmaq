@@ -112,6 +112,9 @@ a {
         -webkit-transition: all 0.25s ease 0s;
         -o-transition: all 0.25s ease 0s;
     }
+    a.silent:hover{
+        color: Black !important;
+    }
 
 .video {
     display: block;
@@ -4272,6 +4275,7 @@ ul.project-detail-block, .project-detail-block ul {
         display: -webkit-flex;
         height: 100%;
         width: 100%;
+        
     }
 
         .shop-item .item-mask .item-mask-detail .item-mask-detail-ele {
@@ -4284,6 +4288,12 @@ ul.project-detail-block, .project-detail-block ul {
     position: relative;
     overflow: hidden;
     /*border: 1px solid grey;*/
+}
+.item-img img{
+    max-height:40vw;
+    max-width:40vw;
+    margin-right:auto;
+    margin-left:auto
 }
 
 .shop-item-info {
@@ -5064,13 +5074,22 @@ ul.project-detail-block, .project-detail-block ul {
 .RecognitionImage img {
     max-width: 210px;
     max-height: 120px;
-    display:block;
     margin: 0 auto;
+    vertical-align: middle;
 }
 
 .RecognitionImage {
     padding-bottom: 15px;
+    
+    white-space: nowrap;
 }
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+
 
 /*.RecognitionContent {
 }*/
@@ -5604,4 +5623,13 @@ ul.nav-tabs {
     color:black !important; 
     font-weight: 900; 
     line-height:35px;
+}
+#client-logos .owl-next{
+    display:none !important;
+}
+#client-logos .owl-prev{
+    display:none !important;
+}
+.twitter-timeline{
+    height:100px !important;
 }
